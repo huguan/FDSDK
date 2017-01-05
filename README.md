@@ -63,6 +63,7 @@ FDUser.getInstance().logout();
 
 `如果游戏需要校验支付结果，可以由游戏服务器生成唯一订单号，复制给extension参数，在调用支付回调地址时，FDSDK服务器会把extension参数原封不动的传回给游戏服务器`
 
+参数说明
 <table>
     <thead>
         <tr>
@@ -96,6 +97,12 @@ FDUser.getInstance().logout();
             <td>int</td>
             <td>单个商品价格</td>
             <td>单位：分</td>
+        </tr>
+        <tr>
+            <td>ratio</td>
+            <td>int</td>
+            <td>兑换比例</td>
+            <td></td>
         </tr>
         <tr>
             <td>buyNum</td>
@@ -160,6 +167,7 @@ FDUser.getInstance().logout();
     </tbody>
 </table>
 
+代码示例
 ```java
 PayParams params = new PayParams();
 params.setBuyNum(1);
@@ -176,4 +184,125 @@ params.setServerId("10");
 params.setServerName("测试");
 params.setVip("vip1");
 FDPay.getInstance().orderAndPay(params);
+```
+
+5.提交扩展数据（必接）
+
+用户扩展数据，已经登录的角色相关数据，有的渠道需要统计角色相关数据
+
+参数说明
+
+
+DataType 参数类型
+
+<table>
+    <thead>
+        <tr>
+            <th>类型</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>TYPE_CREATE_ROLE = 2</td>
+            <td>创建角色</td>
+        </tr>
+        <tr>
+            <td>TYPE_ENTER_GAME = 3</td>
+            <td>进入游戏</td>
+        </tr>
+        <tr>
+            <td>TYPE_LEVEL_UP = 4</td>
+            <td>等级提升</td>
+        </tr>
+    </tbody>
+</table>
+
+扩展参数 extraData 说明
+
+<table>
+    <thead>
+        <tr>
+        	<th>参数</th>
+            <th>类型</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>dataType</td>
+            <td>DataType枚举</td>
+            <td>数据类型，当前处于阶段</td>
+        </tr>
+        <tr>
+            <td>roleID</td>
+            <td>int</td>
+            <td>角色id</td>
+        </tr>
+        <tr>
+            <td>roleName</td>
+            <td>String</td>
+            <td>角色名称</td>
+        </tr>
+        <tr>
+            <td>roleLevel</td>
+            <td>String</td>
+            <td>角色等级</td>
+        </tr>
+        <tr>
+            <td>serverID</td>
+            <td>int</td>
+            <td>服务器id</td>
+        </tr>
+        <tr>
+            <td>serverName</td>
+            <td>String</td>
+            <td>服务器名称</td>
+        </tr>
+        <tr>
+            <td>moneyNum</td>
+            <td>int</td>
+            <td>余额</td>
+        </tr>
+        <tr>
+            <td>vipLv</td>
+            <td>int</td>
+            <td>vip等级</td>
+        </tr>
+         <tr>
+            <td>unionName</td>
+            <td>String</td>
+            <td>公会名称</td>
+        </tr>
+    </tbody>
+</table>
+
+代码示例
+```java
+if(FDUser.getInstance().isSupport("submitExtraData")) {
+	UserExtraData params = new UserExtraData();
+	params.setRoleID("12345");
+	params.setDataType(1);
+	params.setMoneyNum(1);
+	params.setRoleLevel("11");
+	params.setRoleName("角色名");
+	params.setServerID(1);
+	params.setServerName("服务器名称");
+	params.setUnionName("公会名称");
+	params.setVipLv(10);
+	params.setCreateTime(123456789); //角色创建时间 	
+	FDUser.getInstance().submitExtraData(params); 
+}
+```
+
+6.退出SDK（必接）
+
+代码示例
+```java
+if (!FDUser.getInstance().isSupport("exit")) 
+{
+	//某些sdk没有指定退出逻辑，可以在这里调用自己的退出逻辑
+	return;
+}
+FDUser.getInstance().exit();
 ```
