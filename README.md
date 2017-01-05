@@ -388,3 +388,285 @@ public boolean onKeyDown(int keyCode, KeyEvent event)
 	return true;
 }
 ```
+
+API消息通知说明
+==============
+
+1.设置SDK接口监听器（在SDK初始化前设置）
+
+回调方法说明 
+<table>
+    <thead>
+        <tr>
+            <th>操作回调</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+	    <tr>
+            <th>onResult(int code, String msg)</th>
+            <th>SDK操作返回的状态信息。比如SDK初始化成功，SDK初始化失败，SDK登陆成功，登陆失败等信息</th>
+        </tr>
+        <tr>
+            <td>onInitResult(InitResult result)</td>
+            <td>初始化成功回调</td>
+        </tr>
+        <tr>
+            <td>onAuthResult(UToken authResult)</td>
+            <td>登录验证成功，如果是切换账号验证成功，authResult.isSwitch()为true</td>
+        </tr>
+        <tr>
+            <td>onLogout()</td>
+            <td>注销成功</td>
+        </tr>
+        <tr>
+            <td>onPayResult(PayResult result)</td>
+            <td>支付成功</td>
+        </tr>
+    </tbody>
+</table>
+
+onResult参数code说明
+<table>
+    <thead>
+        <tr>
+            <th>错误码</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>CODE_NO_NETWORK = 0</td>
+            <td>没有网络连接</td>
+        </tr>
+        <tr>
+            <td>CODE_INIT_SUCCESS = 1</td>
+            <td>初始化成功</td>
+        </tr>
+        <tr>
+            <td>CODE_INIT_FAIL = 2</td>
+            <td>注销成功</td>
+        </tr>
+        <tr>
+            <td>CODE_UNINIT = 3</td>
+            <td>没有初始化</td>
+        </tr>
+        <tr>
+            <td>CODE_LOGIN_SUCCESS = 4</td>
+            <td>登录成功</td>
+        </tr>
+        <tr>
+            <td>CODE_LOGIN_FAIL = 5</td>
+            <td>登录失败</td>
+        </tr>
+        <tr>
+            <td>CODE_LOGIN_TIMEOUT = 6</td>
+            <td>登录超时</td>
+        </tr>
+        <tr>
+            <td>CODE_UNLOGIN = 7</td>
+            <td>没有登录</td>
+        </tr>
+        <tr>
+            <td>CODE_LOGOUT_SUCCESS = 8</td>
+            <td>登出成功</td>
+        </tr>
+        <tr>
+            <td>CODE_LOGOUT_FAIL = 9</td>
+            <td>登出失败</td>
+        </tr>
+        <tr>
+            <td>CODE_PAY_SUCCESS = 10</td>
+            <td>支付成功</td>
+        </tr>
+        <tr>
+            <td>CODE_PAY_FAIL = 11</td>
+            <td>支付失败</td>
+        </tr>
+        <tr>
+            <td>CODE_EXIT_SUCCESS = 33</td>
+            <td>退出成功</td>
+        </tr>
+    </tbody>
+</table>
+
+
+onAuthResult 回调参数UToken 说明
+
+<table>
+    <thead>
+        <tr>
+            <th>接口</th>
+            <th>返回值</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>isSuc()</td>
+            <td>Boolean</td>
+            <td>验证结果</td>
+        </tr>
+        <tr>
+            <td>getUserID()</td>
+            <td>Int</td>
+            <td>FDSDK返回的唯一账号</td>
+        </tr>
+        <tr>
+            <td>getSdkUserID()</td>
+            <td>String</td>
+            <td>渠道sdk返回的账号，可能为空</td>
+        </tr>
+        <tr>
+            <td>getUsername()</td>
+            <td>String</td>
+            <td>FDSDK返回的用户名</td>
+        </tr>
+        <tr>
+            <td>getSdkUsername()</td>
+            <td>String</td>
+            <td>渠道SDK返回的用户名，可能为空</td>
+        </tr>
+        <tr>
+            <td>getToken()</td>
+            <td>String</td>
+            <td>用于游戏服向FDSDK服务器做二次验证的令牌（参见FDSDK服务端接入文档）</td>
+        </tr>
+        <tr>
+            <td>getExtension()</td>
+            <td>String</td>
+            <td>登录渠道SDK成功后返回给客户端的数据</td>
+        </tr>
+        <tr>
+            <td>isSwitch()</td>
+            <td>Boolean</td>
+            <td>是否切换账号</td>
+        </tr>
+    </tbody>
+</table>
+
+代码示例
+```java
+FDSDK.getInstance().setSDKListener(new IFDSDKListener()
+{
+	@Override
+	public void onResult(final int code, final String message) 
+	{
+		FDSDK.getInstance().runOnMainThread(new Runnable() 
+		{	
+			@Override
+			public void run() 
+			{
+				switch(code)
+				{
+				case FDCode.CODE_INIT_SUCCESS:
+					Log.d("FDSDK", "初始化成功");
+					break;
+				case FDCode.CODE_INIT_FAIL:
+					Log.d("FDSDK", "初始化失败");
+					break;
+				case FDCode.CODE_LOGIN_FAIL:
+					Log.d("FDSDK", "登录失败");
+					break;
+				case FDCode.CODE_LOGIN_SUCCESS:
+					Log.d("FDSDK", "登录成功");
+					break;
+				case FDCode.CODE_LOGOUT_SUCCESS:
+					Log.d("FDSDK", "注销成功");
+					break;
+				case FDCode.CODE_EXIT_SUCCESS:
+    				Log.d("FDSDK", "退出成功");
+					break;
+				default:
+				Log.d("FDSDK", "onResult:"+message);
+						
+				}
+			}
+		});
+		
+	}
+	
+	@Override
+	public void onLoginResult(String result) 
+	{
+		Log.d("FDSDK", "The sdk login result is "+result);
+		MainActivity.this.runOnUiThread(new Runnable() 
+		{
+			@Override
+			public void run() 
+			{	
+				Log.d("FDSDK", "登录成功");
+			}
+		});
+	}
+	
+	@Override
+	public void onAuthResult(final UToken authResult) 
+	{
+		MainActivity.this.runOnUiThread(new Runnable()
+		{	
+			@Override
+			public void run() {
+				if(authResult.isSuc())
+				{
+					Log.d("FDSDK", "获取Token成功:" + authResult.getToken());
+					//Todo 在此处处理登录登录成功业务
+				}
+				else
+				{
+					Log.d("FDSDK", "获取Token失败");
+				}
+			}
+		});
+	}    			
+
+	@Override
+	public void onSwitchAccount() {
+		MainActivity.this.runOnUiThread(new Runnable() {
+			@Override
+			public void run()
+			{
+				Log.d("FDSDK", "切换帐号成功");
+			}
+		});
+	}
+
+	@Override
+	public void onSwitchAccount(String result) {
+		MainActivity.this.runOnUiThread(new Runnable() {
+			@Override
+			public void run()
+			{
+				Log.d("FDSDK", "切换帐号并登录成功" + result);
+			}
+		});
+	}
+
+	@Override
+	public void onLogout() {
+		MainActivity.this.runOnUiThread(new Runnable() {
+			@Override
+			public void run()
+			{
+				Log.d("FDSDK", "个人中心退出帐号成功");
+			}
+		});
+	}
+
+	@Override
+	public void onPayResult(final PayResult result) {
+		MainActivity.this.runOnUiThread(new Runnable() {
+			@Override
+			public void run()
+			{
+				Log.d("FDSDK", "支付成功,商品:"+result.getProductName());
+			}
+		});
+	}
+
+	@Override
+	public void onInitResult(InitResult result) {
+		
+	}
+});
+```
