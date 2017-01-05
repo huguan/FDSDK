@@ -306,3 +306,85 @@ if (!FDUser.getInstance().isSupport("exit"))
 }
 FDUser.getInstance().exit();
 ```
+
+7.添加生命周期方法（必接）
+
+代码示例
+
+```java
+public void onActivityResult(int requestCode, int resultCode, Intent data){
+	FDSDK.getInstance().onActivityResult(requestCode, resultCode, data);
+	super.onActivityResult(requestCode, resultCode, data);
+}
+	
+public void onStart(){
+	FDSDK.getInstance().onStart();
+	super.onStart();
+}
+
+public void onPause(){
+	FDSDK.getInstance().onPause();
+	super.onPause();
+}
+public void onResume(){
+	FDSDK.getInstance().onResume();
+	super.onResume();
+}
+public void onNewIntent(Intent newIntent){
+	FDSDK.getInstance().onNewIntent(newIntent);
+	super.onNewIntent(newIntent);
+}
+public void onStop(){
+	FDSDK.getInstance().onStop();
+	super.onStop();
+}
+public void onDestroy(){
+	FDSDK.getInstance().onDestroy();
+	super.onDestroy();
+}
+public void onRestart(){
+	FDSDK.getInstance().onRestart();
+	super.onRestart();
+}
+
+public void onConfigurationChanged(Configuration newConfig){
+	super.onConfigurationChanged(newConfig);
+}
+
+public boolean dispatchKeyEvent(KeyEvent event) {
+	FDSDK.getInstance().onBackPressed();
+	return super.dispatchKeyEvent(event);
+}
+
+//如果是unity开发的游戏，需要把onBackPressed和onKeyDown注释掉
+public void onBackPressed()
+{
+	FDSDK.getInstance().onBackPressed();
+	super.onBackPressed();
+	if(FDUser.getInstance().isSupport("exit"))
+	{
+		FDUser.getInstance().exit();
+	}
+	else
+	{
+		this.finish();
+		System.exit(0);
+	}
+}
+
+public boolean onKeyDown(int keyCode, KeyEvent event)
+{
+	if(keyCode == KeyEvent.KEYCODE_BACK){
+		if(FDUser.getInstance().isSupport("exit"))
+		{
+			FDUser.getInstance().exit();
+		}
+		else
+		{
+			this.finish();
+			System.exit(0);
+		}
+	}
+	return true;
+}
+```
