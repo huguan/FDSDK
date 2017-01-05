@@ -1,6 +1,5 @@
 # FKSDK
-[![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/seven/HGSDKDemo/master/LICENSE)&nbsp;
-互冠聚合SDK
+[![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/seven/FKSDK/master/LICENSE)&nbsp;
 
 使用
 ==============
@@ -405,7 +404,8 @@ API消息通知说明
     <tbody>
 	    <tr>
             <th>onResult(int code, String msg)</th>
-            <th>SDK操作返回的状态信息。比如SDK初始化成功，SDK初始化失败，SDK登陆成功，登陆失败等信息</th>
+            <th>SDK操作返回的状态信息。比如SDK初始化成功，</br>
+            SDK初始化失败，SDK登陆成功，登陆失败等信息</th>
         </tr>
         <tr>
             <td>onInitResult(InitResult result)</td>
@@ -413,7 +413,8 @@ API消息通知说明
         </tr>
         <tr>
             <td>onAuthResult(UToken authResult)</td>
-            <td>登录验证成功，如果是切换账号验证成功，authResult.isSwitch()为true</td>
+            <td>登录验证成功，如果是切换账号验证成功，</br>
+            authResult.isSwitch()为true</td>
         </tr>
         <tr>
             <td>onLogout()</td>
