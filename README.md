@@ -1,12 +1,12 @@
-# FKSDK 互冠聚合SDK安卓客户端文档
-[![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/huguan/FKSDK/master/LICENSE)&nbsp;
+# FDSDK 互冠聚合SDK安卓客户端文档
+[![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/huguan/FDSDK/master/LICENSE)&nbsp;
 
 使用
 ==============
 1.将fdsdk.jar包复制到游戏项目对应的目录下。
 
 2.导入库文件、修改manifest<br/>
-<img src="https://raw.githubusercontent.com/huguan/FKSDK/master/Snapshots/Androidmanifest.png"><br/>
+<img src="https://raw.githubusercontent.com/huguan/FDSDK/master/Snapshots/Androidmanifest.png"><br/>
 
 注意	
 ==============
