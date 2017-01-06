@@ -44,7 +44,8 @@ FDUser.getInstance().login();
 
 3.切换账号
 ```java
-if (!FDUser.getInstance().isSupport("switchLogin")) {
+if (!FDUser.getInstance().isSupport("switchLogin")) 
+{
 	return;
 }
 FDUser.getInstance().switchLogin();
@@ -52,7 +53,8 @@ FDUser.getInstance().switchLogin();
 
 4.注销
 ```java
-if (!FDUser.getInstance().isSupport("logout")) {
+if (!FDUser.getInstance().isSupport("logout"))
+{
 	return;
 }
 FDUser.getInstance().logout();
@@ -278,7 +280,8 @@ DataType 参数类型
 
 代码示例
 ```java
-if(FDUser.getInstance().isSupport("submitExtraData")) {
+if(FDUser.getInstance().isSupport("submitExtraData")) 
+{
 	UserExtraData params = new UserExtraData();
 	params.setRoleID("12345");
 	params.setDataType(1);
@@ -403,9 +406,9 @@ API消息通知说明
     </thead>
     <tbody>
 	    <tr>
-            <th>onResult(int code, String msg)</th>
-            <th>SDK操作返回的状态信息。比如SDK初始化成功，</br>
-            SDK初始化失败，SDK登陆成功，登陆失败等信息</th>
+            <td>onResult(int code, String msg)</td>
+            <td>SDK操作返回的状态信息。比如SDK初始化成功，
+            SDK初始化失败，SDK登陆成功，登陆失败等信息</td>
         </tr>
         <tr>
             <td>onInitResult(InitResult result)</td>
@@ -413,7 +416,7 @@ API消息通知说明
         </tr>
         <tr>
             <td>onAuthResult(UToken authResult)</td>
-            <td>登录验证成功，如果是切换账号验证成功，</br>
+            <td>登录验证成功，如果是切换账号验证成功，
             authResult.isSwitch()为true</td>
         </tr>
         <tr>
