@@ -1,4 +1,4 @@
-# FKSDK
+# FKSDK 互冠聚合SDK安卓客户端文档
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/huguan/FKSDK/master/LICENSE)&nbsp;
 
 使用
