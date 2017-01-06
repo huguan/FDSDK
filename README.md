@@ -1,5 +1,5 @@
 # FKSDK
-[![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/huguan/FKSDK/blob/master/LICENSE)&nbsp;
+[![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/huguan/FKSDK/master/LICENSE)&nbsp;
 
 使用
 ==============
