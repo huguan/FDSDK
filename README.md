@@ -1,4 +1,4 @@
-# FDSDK 互冠聚合SDK安卓客户端文档
+# 互冠聚合FDSDK Android客户端文档
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://raw.githubusercontent.com/huguan/FDSDK/master/LICENSE)&nbsp;
 
 使用
