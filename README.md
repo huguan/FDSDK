@@ -674,3 +674,8 @@ FDSDK.getInstance().setSDKListener(new IFDSDKListener()
 	}
 });
 ```
+
+
+许可证
+==============
+HGSDK 使用 MIT 许可证，详情见 LICENSE 文件。
