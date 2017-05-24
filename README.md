@@ -190,9 +190,8 @@ FDPay.getInstance().orderAndPay(params);
 5.提交扩展数据（必接）
 
 用户扩展数据，已经登录的角色相关数据，有的渠道需要统计角色相关数据
-
+（PS：由于选择服务器时只能获取到服务器ID和服务器名称，故其他参数填默认值就好）
 参数说明
-
 
 DataType 参数类型
 
@@ -204,6 +203,10 @@ DataType 参数类型
         </tr>
     </thead>
     <tbody>
+		<tr>
+            <td>TYPE_CREATE_ROLE = 1</td>
+            <td>选择服务器</td>
+        </tr>
         <tr>
             <td>TYPE_CREATE_ROLE = 2</td>
             <td>创建角色</td>
