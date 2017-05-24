@@ -204,7 +204,7 @@ DataType 参数类型
     </thead>
     <tbody>
 		<tr>
-            <td>TYPE_CREATE_ROLE = 1</td>
+            <td>TYPE_SELECT_SERVER = 1</td>
             <td>选择服务器</td>
         </tr>
         <tr>
